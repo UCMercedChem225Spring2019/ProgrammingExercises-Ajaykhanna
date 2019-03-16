@@ -1,17 +1,12 @@
       Program pgrm_02_01
 !
-!     This program reads a file name from the command line, opens that
-!     file, and
-!     loads a packed/linearized form of a square matrix. Then, the
-!     packed matrix
-!     is expanded assuming a row-packed form and printed. Finally, the
-!     packed
+!     This program reads a file name from the command line, opens that file, and
+!     loads a packed/linearized form of a square matrix. Then, the packed matrix
+!     is expanded assuming a row-packed form and printed. Finally, the packed
 !     matrix is expanded as a column-packed form and printed.
 !
-!     The input file is expected to have the leading dimension (an
-!     integer
-!     NDim) of the matrix on the first line. The next NDim*NDim lines
-!     each
+!     The input file is expected to have the leading dimension (an integer
+!     NDim) of the matrix on the first line. The next NDim*NDim lines each
 !     have one real number each given.
 !
       Implicit None
@@ -34,11 +29,11 @@
       Allocate(Array_Input(NDim*NDim),Matrix(NDim,NDim))
 !
 ! *************************************************************************
-! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
-! *************************************************************************
-      do i = 1, NDim
-        read(*,*), Array_Input(i,1), Array_Input(i,2), Array_Input(i,3)
+      do i = 1, NDim*NDim
+        read(IIn,*) Array_Input(i)
       enddo
+! *************************************************************************
+!
 !
 !     Convert Array_Input to Matrix and print the matrix.
 !
@@ -56,10 +51,8 @@
 
       Subroutine Packed2Matrix_ColumnWise(M,N,ArrayIn,AMatOut)
 !
-!     This subroutine accepts an array, ArrayIn, that is M*N long. It
-!     then
-!     takes those elements and converts them to the M-by-N matrix
-!     AMatOut
+!     This subroutine accepts an array, ArrayIn, that is M*N long. It then
+!     takes those elements and converts them to the M-by-N matrix AMatOut
 !     such that the elements in ArrayIn are interpreted as a packed
 !     column-wise form of the matrix AMatOut.
 !
@@ -70,28 +63,29 @@
 !
       Integer::i,j,k
 !
-!     Loop through the elements of AMatOut and fill them appropriately
-!     from
+!     Loop through the elements of AMatOut and fill them appropriately from
 !     Array_Input.
 !
-      do i = 1, M
-        read(*,*), ArrayIn(i,1), ArrayIn(i,2), ArrayIn(i,3)
-        AMatOut = 
-      enddo
+!
 ! *************************************************************************
-! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
+      k = 0
+      do i = 1, M
+       do j = 1, N
+          k = k+1
+	  AMatOut(j,i) = ArrayIn(k)
+       enddo
+      enddo
 ! *************************************************************************
 !
 !
       Return
       End Subroutine Packed2Matrix_ColumnWise
 
+
       Subroutine Packed2Matrix_RowWise(M,N,ArrayIn,AMatOut)
 !
-!     This subroutine accepts an array, ArrayIn, that is M*N long. It
-!     then
-!     takes those elements and converts them to the M-by-N matrix
-!     AMatOut
+!     This subroutine accepts an array, ArrayIn, that is M*N long. It then
+!     takes those elements and converts them to the M-by-N matrix AMatOut
 !     such that the elements in ArrayIn are interpreted as a packed
 !     row-wise form of the matrix AMatOut.
 !
@@ -102,17 +96,55 @@
 !
       Integer::i,j,k
 !
-!     Loop through the elements of AMatOut and fill them appropriately
-!     from
+!     Loop through the elements of AMatOut and fill them appropriately from
 !     Array_Input.
 !
-      do i = 1, M
-        read(*,*), ArrayIn(i,1), ArrayIn(i,2), ArrayIn(i,3)
-      enddo
+!
 ! *************************************************************************
-! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
+      k = 0
+      do i = 1, M
+       do j = 1, N
+         k = k+1
+         AMatOut(i,j) = ArrayIn(k)
+       enddo
+      enddo
 ! *************************************************************************
 !
 !
       Return
       End Subroutine Packed2Matrix_RowWise
+
+      Subroutine Print_Matrix_Full_Real(AMat,M,N)
+!
+!     This subroutine prints a real matrix that is fully dimension - i.e.,
+!     not stored in packed form. AMat is the matrix, which is dimensioned
+!     (M,N).
+!
+!     The output of this routine is sent to unit number 6 (set by the local
+!     parameter integer IOut).
+!
+!
+!     Variable Declarations
+!
+      implicit none
+      integer,intent(in)::M,N
+      real,dimension(M,N),intent(in)::AMat
+!
+!     Local variables
+      integer,parameter::IOut=6,NColumns=5
+      integer::i,j,IFirst,ILast
+!
+ 1000 Format(1x,A)
+ 2000 Format(5x,5(7x,I7))
+ 2010 Format(1x,I7,5F14.6)
+!
+      Do IFirst = 1,N,NColumns
+        ILast = Min(IFirst+NColumns-1,N)
+        write(IOut,2000) (i,i=IFirst,ILast)
+        Do i = 1,M
+          write(IOut,2010) i,(AMat(i,j),j=IFirst,ILast)
+        endDo
+      endDo
+!
+      Return
+      End Subroutine Print_Matrix_Full_Real
