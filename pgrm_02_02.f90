@@ -1,6 +1,7 @@
       Program pgrm_02_02
 !
 !     This program reads a file name from the command line, opens that
+<<<<<<< HEAD
 !     file, and loads a packed form of a symmetric matrix. Then, the
 !     packed
 !     matrix is expanded assuming a column-wise lower-triangle packed
@@ -11,6 +12,14 @@
 !
 !     The input file is expected to have the leading dimension (an
 !     integer
+=======
+!     file, and loads a packed form of a symmetric matrix. Then, the packed
+!     matrix is expanded assuming a column-wise lower-triangle packed form
+!     and printed. Finally, the packed matrix is expanded as a column-wise
+!     upper-triangle packed form and printed.
+!
+!     The input file is expected to have the leading dimension (an integer
+>>>>>>> upstream/master
 !     NDim) of the matrix on the first line. The next (NDim*(NDim+1))/2
 !     lines each have one real number each given.
 !
@@ -35,9 +44,13 @@
       Allocate(Array_Input((NDim*(NDim+1))/2),Matrix(NDim,NDim))
 !
 ! *************************************************************************
+<<<<<<< HEAD
       do i = 1, (NDim*(NDim+1))/2
        read(IIn,*) Array_Input(i)
       enddo
+=======
+! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
+>>>>>>> upstream/master
 ! *************************************************************************
 !
 !
@@ -55,8 +68,12 @@
 
       Subroutine SymmetricPacked2Matrix_LowerPac(N,ArrayIn,AMatOut)
 !
+<<<<<<< HEAD
 !     This subroutine accepts an array, ArrayIn, that is (N*(N+1))/2
 !     long.
+=======
+!     This subroutine accepts an array, ArrayIn, that is (N*(N+1))/2 long.
+>>>>>>> upstream/master
 !     It then converts that form to the N-by-N matrix AMatOut taking
 !     ArrayIn to be in lower-packed storage form. Note: The storage mode
 !     also assumes the lower-packed storage is packed by columns.
@@ -68,12 +85,17 @@
 !
       Integer::i,j,k
 !
+<<<<<<< HEAD
 !     Loop through the elements of AMatOut and fill them appropriately
 !     from
+=======
+!     Loop through the elements of AMatOut and fill them appropriately from
+>>>>>>> upstream/master
 !     Array_Input.
 !
 !
 ! *************************************************************************
+<<<<<<< HEAD
       k = 1 
       do i = 1, N
        do j = i, N
@@ -82,6 +104,9 @@
          k = k+1
        enddo
       enddo
+=======
+! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
+>>>>>>> upstream/master
 ! *************************************************************************
 !
 !
@@ -91,8 +116,12 @@
 
       Subroutine SymmetricPacked2Matrix_UpperPac(N,ArrayIn,AMatOut)
 !
+<<<<<<< HEAD
 !     This subroutine accepts an array, ArrayIn, that is (N*(N+1))/2
 !     long.
+=======
+!     This subroutine accepts an array, ArrayIn, that is (N*(N+1))/2 long.
+>>>>>>> upstream/master
 !     It then converts that form to the N-by-N matrix AMatOut taking
 !     ArrayIn to be in upper-packed storage form. Note: The storage mode
 !     also assumes the upper-packed storage is packed by columns.
@@ -104,12 +133,17 @@
 !
       Integer::i,j,k
 !
+<<<<<<< HEAD
 !     Loop through the elements of AMatOut and fill them appropriately
 !     from
+=======
+!     Loop through the elements of AMatOut and fill them appropriately from
+>>>>>>> upstream/master
 !     Array_Input.
 !
 !
 ! *************************************************************************
+<<<<<<< HEAD
       k = 1
       do i = 1,N
        do j = 1,i
@@ -118,11 +152,15 @@
         k = k + 1
        enddo
       enddo
+=======
+! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
+>>>>>>> upstream/master
 ! *************************************************************************
 !
 !
       Return
       End Subroutine SymmetricPacked2Matrix_UpperPac
+<<<<<<< HEAD
 
       Subroutine Print_Matrix_Full_Real(AMat,M,N)
 !
@@ -161,3 +199,5 @@
 
       Return
       End Subroutine Print_Matrix_Full_Real
+=======
+>>>>>>> upstream/master

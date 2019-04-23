@@ -29,9 +29,13 @@
       Allocate(Array_Input(NDim*NDim),Matrix(NDim,NDim))
 !
 ! *************************************************************************
+<<<<<<< HEAD
       do i = 1, NDim*NDim
         read(IIn,*) Array_Input(i)
       enddo
+=======
+! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
+>>>>>>> upstream/master
 ! *************************************************************************
 !
 !
@@ -68,6 +72,7 @@
 !
 !
 ! *************************************************************************
+<<<<<<< HEAD
       k = 0
       do i = 1, M
        do j = 1, N
@@ -75,6 +80,9 @@
 	  AMatOut(j,i) = ArrayIn(k)
        enddo
       enddo
+=======
+! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
+>>>>>>> upstream/master
 ! *************************************************************************
 !
 !
@@ -101,6 +109,7 @@
 !
 !
 ! *************************************************************************
+<<<<<<< HEAD
       k = 0
       do i = 1, M
        do j = 1, N
@@ -108,11 +117,15 @@
          AMatOut(i,j) = ArrayIn(k)
        enddo
       enddo
+=======
+! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
+>>>>>>> upstream/master
 ! *************************************************************************
 !
 !
       Return
       End Subroutine Packed2Matrix_RowWise
+<<<<<<< HEAD
 
       Subroutine Print_Matrix_Full_Real(AMat,M,N)
 !
@@ -148,3 +161,5 @@
 !
       Return
       End Subroutine Print_Matrix_Full_Real
+=======
+>>>>>>> upstream/master

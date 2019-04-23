@@ -1,6 +1,7 @@
       Program pgrm_02_03
 !
 !     This program reads a file name from the command line, opens that
+<<<<<<< HEAD
 !     file, and loads a packed form of a symmetric matrix. Then, the
 !     packed
 !     matrix is expanded assuming a column-wise lower-triangle form and
@@ -10,6 +11,14 @@
 !
 !     The input file is expected to have the leading dimension (an
 !     integer
+=======
+!     file, and loads a packed form of a symmetric matrix. Then, the packed
+!     matrix is expanded assuming a column-wise lower-triangle form and
+!     printed. Finally, the matrix is diagonalized using the LAPack routine
+!     SSPEV. The eigenvalues and eigenvectors are printed.
+!
+!     The input file is expected to have the leading dimension (an integer
+>>>>>>> upstream/master
 !     NDim) of the matrix on the first line. The next (NDim*(NDim+1))/2
 !     lines each have one real number each given.
 !
@@ -35,9 +44,13 @@
       Allocate(Temp_Matrix(NDim,NDim))
 !
 ! *************************************************************************
+<<<<<<< HEAD
       do i = 1, (NDim*(NDim+1))/2
         read(IIn,*) Array_Input(i)
       enddo
+=======
+! WRITE CODE HERE TO READ THE ARRAY ELEMENTS FROM THE INPUT FILE.
+>>>>>>> upstream/master
 ! *************************************************************************
 !
       Close(Unit=IIn)
@@ -47,7 +60,11 @@
       Write(*,*)' The matrix loaded (column) lower-triangle packed:'
       Call SymmetricPacked2Matrix_LowerPac(NDim,Array_Input,Matrix)
       Call Print_Matrix_Full_Real(Matrix,NDim,NDim)
+<<<<<<< HEAD
       Call SSPEV('V','L',NDim,Array_Input,EVals,EVecs,NDim,  &
+=======
+      Call SSPEV('***','***',NDim,Array_Input,EVals,EVecs,NDim,  &
+>>>>>>> upstream/master
         Temp_Vector,IError)
       If(IError.ne.0) then
         Write(*,*)' Failure in DSPEV.'
@@ -59,6 +76,7 @@
       Call Print_Matrix_Full_Real(EVecs,NDim,NDim)
 !
       End Program pgrm_02_03
+<<<<<<< HEAD
 
       Subroutine SymmetricPacked2Matrix_LowerPac(N,ArrayIn,AMatOut)
 !
@@ -133,3 +151,5 @@
       Return
       End Subroutine Print_Matrix_Full_Real
 
+=======
+>>>>>>> upstream/master
